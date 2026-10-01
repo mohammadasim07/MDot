@@ -1,0 +1,62 @@
+# PrintEase Application Configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: PrintEase
+  
+  # H2 Database (file-based for persistence)
+  datasource:
+    url: jdbc:h2:file:./data/printease;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: printease_local
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+  
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+# PrintEase custom configuration
+printease:
+  storage:
+    base-path: ./storage
+    originals-dir: originals
+    processed-dir: processed
+    print-ready-dir: print-ready
+  
+  cleanup:
+    enabled: true
+    retention-hours: 24
+    cron: "0 0 2 * * *"  # Run at 2 AM daily
+  
+  queue:
+    max-workers: 4
+    max-queue-size: 500
+    poll-interval-ms: 1000
+  
+  security:
+    api-key: printease-local-key-change-in-production
+    enabled: false  # Enable for production
+
+logging:
+  level:
+    com.printease: DEBUG
+    org.springframework: INFO

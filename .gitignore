@@ -1,0 +1,25 @@
+# Node dependencies and build
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Java backend
+**/target/
+**/.mvn/
+**/storage/
+**/data/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Editor & OS files
+.vscode/
+.idea/
+.DS_Store
+*.suo
+Thumbs.db
